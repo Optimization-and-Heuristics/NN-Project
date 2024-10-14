@@ -59,6 +59,13 @@ Puedes ejecutar el código en **Jupyter Notebooks** para facilitar la interacci�
 
 ## Experimentos y Resultados
 
+## Planes Futuros
+- Añadir opción para agregar n hidden layers
+- Añadir más funciones de activación
+- Añadir más funciones de optimización
+- Mejorar el diseño de la clase core para que admita funciones de activación y optimización como parámetros
+
+
 ## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si deseas contribuir, por favor sigue estos pasos:
