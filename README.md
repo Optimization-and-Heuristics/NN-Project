@@ -75,3 +75,6 @@ Puedes ejecutar el código en **Jupyter Notebooks** para facilitar la interacci�
 3. Haz commit de tus cambios (`git commit -am 'Añadir nueva característica'`).
 4. Haz push a la rama (`git push origin mejora-característica`).
 5. Abre un **Pull Request**.
+
+## Miembros del grupo:
+[Nicole María Ortega Ojeda](https://github.com/nnicoleortegaa)
