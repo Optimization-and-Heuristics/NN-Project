@@ -78,4 +78,5 @@ Puedes ejecutar el código en **Jupyter Notebooks** para facilitar la interacci�
 
 ## Miembros del grupo:
 [Nicole María Ortega Ojeda](https://github.com/nnicoleortegaa)
+
 [Oscar Rico Rodríguez](https://github.com/orr21)
