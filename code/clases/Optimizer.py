@@ -1,5 +1,9 @@
 class Optimizer:
-    pass
+    def __init__(self):
+        pass
+
+    def update(self, model):
+        raise NotImplementedError("Debe implementarse en una subclase específica.")
 
 
 class SGDOptimizer(Optimizer):

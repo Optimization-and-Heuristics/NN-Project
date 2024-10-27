@@ -6,9 +6,9 @@ class Trainer:
         self.model = model
         self.optimizer = optimizer
 
-    def train(self, X_train, Y_train, X_val=None, Y_val=None, epochs=100, print_every=10):
+    def train(self, X_train, Y_train, X_val, Y_val, epochs=100, print_every=10):
         print("-" * 59)
-        for epoch in range(epochs):
+        for epoch in range(epochs + 1):
             val_start_time = time.time()
             
             # Entrenamiento en el conjunto de entrenamiento
@@ -17,7 +17,7 @@ class Trainer:
             self.optimizer.update(self.model)
 
             # Validación en el conjunto de validación cada 10 épocas
-            if X_val is not None and Y_val is not None and epoch % print_every == 0 and epoch != 0:
+            if epoch % print_every == 0:
                 val_predictions = self.predict(X_val)
                 val_accuracy = self.evaluate(val_predictions, Y_val)
                 print("| end of epoch {:3d} | time: {:5.2f}s | valid accuracy {:8.3f} ".format(
