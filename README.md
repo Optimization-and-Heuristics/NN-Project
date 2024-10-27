@@ -80,3 +80,5 @@ Puedes ejecutar el código en **Jupyter Notebooks** para facilitar la interacci�
 [Nicole María Ortega Ojeda](https://github.com/nnicoleortegaa)
 
 [Oscar Rico Rodríguez](https://github.com/orr21)
+
+[Radosława Żukowska](https://github.com/radoslawazukowska)
