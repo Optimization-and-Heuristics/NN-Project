@@ -2,12 +2,13 @@ import numpy as np
 import time  # Importar la librería `time`
 
 class Trainer:
-    def __init__(self, model, optimizer):
+    def __init__(self, model, optimizer, loss_function):
         self.model = model
         self.optimizer = optimizer
+        self.loss_function = loss_function
 
     def train(self, X_train, Y_train, X_val, Y_val, epochs=100, print_every=10):
-        print("-" * 59)
+        print("-" * 68)
         for epoch in range(epochs + 1):
             val_start_time = time.time()
             
@@ -20,9 +21,10 @@ class Trainer:
             if epoch % print_every == 0:
                 val_predictions = self.predict(X_val)
                 val_accuracy = self.evaluate(val_predictions, Y_val)
-                print("| end of epoch {:3d} | time: {:5.2f}s | valid accuracy {:8.3f} ".format(
-                    epoch, time.time() - val_start_time, val_accuracy))
-                print("-" * 59)
+                val_loss = self.loss_function(Y_val, self.model.A2)
+                print("| Epoch {:3d} | time: {:5.2f}s | val loss {:2.3f} | valid accuracy {:2.3f} |".format(
+                    epoch, time.time() - val_start_time, val_loss, val_accuracy))
+                print("-" * 68)
                 val_start_time = time.time()
     
     def predict(self, X):
