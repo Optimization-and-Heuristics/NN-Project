@@ -59,6 +59,13 @@ Puedes ejecutar el código en **Jupyter Notebooks** para facilitar la interacci�
 
 ## Experimentos y Resultados
 
+## Planes Futuros
+- Añadir opción para agregar n hidden layers
+- Añadir más funciones de activación
+- Añadir más funciones de optimización
+- Mejorar el diseño de la clase core para que admita funciones de activación y optimización como parámetros
+
+
 ## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si deseas contribuir, por favor sigue estos pasos:
@@ -68,3 +75,10 @@ Puedes ejecutar el código en **Jupyter Notebooks** para facilitar la interacci�
 3. Haz commit de tus cambios (`git commit -am 'Añadir nueva característica'`).
 4. Haz push a la rama (`git push origin mejora-característica`).
 5. Abre un **Pull Request**.
+
+## Miembros del grupo:
+[Nicole María Ortega Ojeda](https://github.com/nnicoleortegaa)
+
+[Oscar Rico Rodríguez](https://github.com/orr21)
+
+[Radosława Żukowska](https://github.com/radoslawazukowska)
