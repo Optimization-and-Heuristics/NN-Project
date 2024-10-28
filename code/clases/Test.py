@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def confusion_matrix(Y_test, Y_pred, class_labels=None):
+def confusion_matrix(Y_test, Y_pred, class_labels=None, inclain=False):
     # Número de clases (suponemos que sabemos la cantidad de clases)
     num_classes = np.max([Y_test.max(), Y_pred.max()]) + 1
 
@@ -21,6 +21,10 @@ def confusion_matrix(Y_test, Y_pred, class_labels=None):
     plt.yticks(ticks=np.arange(num_classes), labels=tick_labels)
     plt.xlabel("Predicted Labels")
     plt.ylabel("True Labels")
+    
+    if inclain:
+        # Inclinar los ticks del eje x
+        plt.xticks(ticks=np.arange(num_classes), labels=tick_labels, rotation=45)
 
     # Añadir anotaciones en cada celda
     for i in range(num_classes):
