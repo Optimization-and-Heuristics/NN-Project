@@ -19,18 +19,13 @@ class Trainer:
 
             # Validación en el conjunto de validación cada 10 épocas
             if epoch % print_every == 0:
-                val_predictions = self.predict(X_val)
+                val_predictions = self.model.predict(X_val)
                 val_accuracy = self.evaluate(val_predictions, Y_val)
                 val_loss = self.loss_function(Y_val, self.model.A2)
                 print("| Epoch {:3d} | time: {:5.2f}s | val loss {:2.3f} | valid accuracy {:2.3f} |".format(
                     epoch, time.time() - val_start_time, val_loss, val_accuracy))
                 print("-" * 68)
                 val_start_time = time.time()
-    
-    def predict(self, X):
-        # Forward pass para obtener las predicciones
-        self.model.forward(X)
-        return np.argmax(self.model.A2, axis=0)
 
     def evaluate(self, predictions, Y):
         # Calcular el porcentaje de precisión
