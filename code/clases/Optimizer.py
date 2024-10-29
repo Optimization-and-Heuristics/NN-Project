@@ -1,8 +1,12 @@
+import numpy as np
+
+PARAMS = ['weights', 'biases']
+
 class Optimizer:
     def __init__(self):
         pass
 
-    def update(self, model):
+    def update(self, layer, grad, t=None):
         raise NotImplementedError("Debe implementarse en una subclase específica.")
 
 
@@ -10,34 +14,31 @@ class SGDOptimizer(Optimizer):
     def __init__(self, learning_rate):
         self.learning_rate = learning_rate
 
-    def update(self, model):
-        for key, param in model.parameters.items():
-            model.parameters[key] -= self.learning_rate * model.gradients[key]
+    def update(self, layer, grad, t=None):
+        for param in PARAMS:
+            setattr(layer, param, getattr(layer, param) - self.learning_rate * grad[param])
 
 
 class AdamOptimizer(Optimizer):
-    def __init__(self, learning_rate, beta1=0.9, beta2=0.999, epsilon=1e-8):
+    def __init__(self, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):
         self.learning_rate = learning_rate
         self.beta1 = beta1
         self.beta2 = beta2
         self.epsilon = epsilon
         self.m = {}
         self.v = {}
-        self.t = 0
 
-    def update(self, model):
-        self.t += 1
-        for key, param in model.parameters.items():
-            if key not in self.m:
-                self.m[key] = 0
-                self.v[key] = 0
-
-            gradient_t = model.gradients[key]
-
-            self.m[key] = self.beta1 * self.m[key] + (1 - self.beta1) * gradient_t
-            self.v[key] = self.beta2 * self.v[key] + (1 - self.beta2) * (gradient_t ** 2)
-
-            m_hat = self.m[key] / (1 - self.beta1 ** self.t)
-            v_hat = self.v[key] / (1 - self.beta2 ** self.t)
-
-            model.parameters[key] -= self.learning_rate * m_hat / (v_hat ** 0.5 + self.epsilon)
+    def update(self, layer, grad, t):
+        if layer not in self.m:
+            self.m[layer] = {param: np.zeros_like(getattr(layer, param)) for param in PARAMS}
+            self.v[layer] = {param: np.zeros_like(getattr(layer, param)) for param in PARAMS}
+        
+        for param in PARAMS:
+            self.m[layer][param] = self.beta1 * self.m[layer][param] + (1 - self.beta1) * grad[param]
+            self.v[layer][param] = self.beta2 * self.v[layer][param] + (1 - self.beta2) * (grad[param] ** 2)
+            
+            m_hat = self.m[layer][param] / (1 - self.beta1 ** t)
+            v_hat = self.v[layer][param] / (1 - self.beta2 ** t)
+            
+            setattr(layer, param, getattr(layer, param) - self.learning_rate * m_hat / (np.sqrt(v_hat) + self.epsilon))
+        

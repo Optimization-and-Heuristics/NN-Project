@@ -5,5 +5,5 @@ class Layer:
     def forward(self, X):
         raise NotImplementedError("Debe implementarse en una subclase específica.")
 
-    def backward(self, X, Y):
+    def backward(self, grad_output):
         raise NotImplementedError("Debe implementarse en una subclase específica.")
