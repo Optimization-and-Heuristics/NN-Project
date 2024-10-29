@@ -24,7 +24,7 @@ class Trainer:
                 self.optimizer.update(layer, {"weights": layer.grad_weights, "biases": layer.grad_biases}, 
                                       t=epoch)
             
-            if epoch % print_every == 0:
+            if epoch % print_every == 0 or epoch == 1:
                 val_pred = predict(self.nn,X_val)
                 val_acc = evaluate(val_pred, Y_val)
                 val_loss = self.loss_function(Y_val, self.nn.forward(X_val))

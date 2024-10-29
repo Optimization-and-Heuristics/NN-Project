@@ -5,12 +5,11 @@ class NeuronalNetwork:
         self.layers = []
         in_size = input_size
 
-        # Crear capas de acuerdo a layers_config
         for layer in layers_config:
             output_size = layer['output_size']
             activation = layer['activation']
             self.layers.append(DenseLayer(input_size=in_size, output_size=output_size, activation=activation))
-            in_size = output_size  # La salida de la capa anterior es la entrada de la siguiente
+            in_size = output_size
 
     def forward(self, X):
         for layer in self.layers:
