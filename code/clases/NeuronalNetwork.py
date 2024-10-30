@@ -13,8 +13,8 @@ class NeuronalNetwork:
 
     def forward(self, X):
         for layer in self.layers:
-            x = layer.forward(X)
-        return x
+            X = layer.forward(X)
+        return X
 
     def backward(self, grad_output):
         for layer in reversed(self.layers):

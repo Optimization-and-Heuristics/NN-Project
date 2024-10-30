@@ -2,6 +2,7 @@ import numpy as np
 
 def cross_entropy_loss(y_true, y_pred):
     epsilon = 1e-10
+    # Here we clip the values of y_pred to avoid log(0) and log(1)
     y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
     
     loss = -y_true * np.log(y_pred) - (1 - y_true) * np.log(1 - y_pred)
@@ -9,6 +10,7 @@ def cross_entropy_loss(y_true, y_pred):
 
 def cross_entropy_loss_grad(y_true, y_pred):
     epsilon = 1e-10
+    # Here we clip the values of y_pred to avoid log(0) and log(1)
     y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
     
     grad = (y_pred - y_true) / (y_pred * (1 - y_pred))
