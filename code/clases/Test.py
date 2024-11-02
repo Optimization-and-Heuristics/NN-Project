@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def predict(nn, X):
@@ -88,3 +89,72 @@ def plot_training_history_with_validation(train_info, val_info):
 
     plt.tight_layout()
     plt.show()
+
+
+def calculate_metrics(predictions: np.array, Y: np.array, class_labels=None):
+    predicted_labels = np.argmax(predictions, axis=1)
+    true_labels = np.argmax(Y, axis=1)
+
+    classes = np.unique(true_labels)
+    metrics = {}
+    total_support = len(true_labels)
+
+    weighted_precision_sum = 0
+    weighted_recall_sum = 0
+    weighted_f1_sum = 0
+
+    for cls in classes:
+        tp = np.sum((predicted_labels == cls) & (true_labels == cls))
+        fp = np.sum((predicted_labels == cls) & (true_labels != cls))
+        fn = np.sum((predicted_labels != cls) & (true_labels == cls))
+
+        support = np.sum(true_labels == cls)
+
+        precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+        recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+        f1_score = (
+            2 * precision * recall / (precision + recall)
+            if (precision + recall) > 0
+            else 0
+        )
+
+        if class_labels:
+            metrics[class_labels[cls]] = {
+                "precision": precision,
+                "recall": recall,
+                "f1_score": f1_score,
+                "support": support,
+            }
+        else:
+            metrics[cls] = {
+                "precision": precision,
+                "recall": recall,
+                "f1_score": f1_score,
+                "support": support,
+            }
+
+        weighted_precision_sum += precision * support
+        weighted_recall_sum += recall * support
+        weighted_f1_sum += f1_score * support
+
+    weighted_precision = weighted_precision_sum / total_support
+    weighted_recall = weighted_recall_sum / total_support
+    weighted_f1_score = weighted_f1_sum / total_support
+
+    accuracy = np.mean(predicted_labels == true_labels)
+
+    metrics["weighted_avg"] = {
+        "precision": weighted_precision,
+        "recall": weighted_recall,
+        "f1_score": weighted_f1_score,
+        "support": total_support,
+    }
+
+    return accuracy, metrics
+
+
+def print_metrics(accuracy, metrics):
+    print("Accuracy:", accuracy)
+    metrics_df = pd.DataFrame.from_dict(metrics, orient="index")
+    metrics_df.index.name = "class"
+    print(metrics_df)
