@@ -12,10 +12,12 @@ class NeuronalNetwork:
             in_size = output_size
 
     def forward(self, X):
+        # Algorithm 1. Forward Pass con Múltiples Capas
         for layer in self.layers:
             X = layer.forward(X)
         return X
 
     def backward(self, grad_output):
+        # Algorithm 4. Backward Pass con Múltiples Capas
         for layer in reversed(self.layers):
             grad_output = layer.backward(grad_output)

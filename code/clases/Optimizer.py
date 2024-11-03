@@ -10,7 +10,8 @@ class Optimizer:
         raise NotImplementedError("Debe implementarse en una subclase específica.")
 
 
-class SGDOptimizer(Optimizer):
+class GDOptimizer(Optimizer):
+    # Algorithm 6. Actualización de Parámetros con GD
     def __init__(self, learning_rate):
         self.learning_rate = learning_rate
 
@@ -20,6 +21,7 @@ class SGDOptimizer(Optimizer):
 
 
 class AdamOptimizer(Optimizer):
+    # Algorithm 7. Actualización de Parámetros con Adam
     def __init__(self, learning_rate=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8):
         self.learning_rate = learning_rate
         self.beta1 = beta1

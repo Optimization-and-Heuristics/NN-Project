@@ -10,11 +10,13 @@ class DenseLayer(Layer):
         self.activation = activation()
 
     def forward(self, x):
+        # Algorithm 2. Forward Pass para Dense Layer
         self.input = x
         self.output = self.activation.forward(np.dot(x, self.weights) + self.biases)
         return self.output
     
     def backward(self, grad_output):
+        # Algorithm 5. Backward Pass para Dense Layer
         grad_output = self.activation.backward(self.output, grad_output)
         self.grad_weights = np.dot(self.input.T, grad_output)
         self.grad_biases = np.sum(grad_output, axis=0, keepdims=True)

@@ -9,6 +9,7 @@ def cross_entropy_loss(y_true, y_pred):
     return np.mean(loss)
 
 def cross_entropy_loss_grad(y_true, y_pred):
+    # Algorithm 3. Gradiente de la Pérdida de Entropía Cruzada
     epsilon = 1e-10
     # Here we clip the values of y_pred to avoid log(0) and log(1)
     y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
