@@ -1,4 +1,4 @@
-Neural Network Engine
+# Neural Network Engine
 
 This project implements a neural network engine from scratch, using only Python and `numpy`, optimized without advanced frameworks like PyTorch or TensorFlow. The architecture is based on modularity principles and heuristic optimization, allowing customization and analysis of key components such as activation functions, optimizers, and loss functions. The attached **Documentation** details the theoretical development, methodology, and experimental results.
 
