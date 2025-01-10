@@ -1,6 +1,7 @@
 from .Test import *
 import time
 import numpy as np
+from clases.DenseLayer import DenseLayer
 
 class Trainer:
     def __init__(self, nn, optimizer, loss_function, loss_function_grad, 
@@ -76,11 +77,15 @@ class Trainer:
 
                 # Actualización de parámetros
                 for layer in self.nn.layers:
-                    self.optimizer.update(
-                        layer, 
-                        {"weights": layer.grad_weights, "biases": layer.grad_biases},
-                        t=epoch
-                    )
+                    params = False
+                    if type(layer) is DenseLayer:
+                        params = {"weights": layer.grad_weights, "biases": layer.grad_biases}
+                    if params:
+                        self.optimizer.update(
+                            layer,
+                            params,
+                            t=epoch
+                        )
 
             # Pérdida media de la época
             epoch_loss = np.mean(batch_losses)
