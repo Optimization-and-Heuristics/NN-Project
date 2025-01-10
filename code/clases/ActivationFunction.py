@@ -7,14 +7,12 @@ class ActivationFunction:
     def backward(self, x, grad_output):
         raise NotImplementedError
 
-
 class ReLU(ActivationFunction):
     def forward(self, x):
         return np.maximum(0, x)
 
     def backward(self, x, grad_output):
         return grad_output * (x > 0)
-
 
 class Softmax(ActivationFunction):
     def forward(self, x):
@@ -42,14 +40,12 @@ class Softplus(ActivationFunction):
     def backward(self, x, grad_output):
         return grad_output * (1 / (1 + np.exp(-x)))
 
-
 class Tanh(ActivationFunction):
     def forward(self, x):
         return np.tanh(x)
 
     def backward(self, x, grad_output):
         return grad_output * (1 - np.tanh(x) ** 2)
-
 
 class Sigmoid(ActivationFunction):
     def forward(self, x):

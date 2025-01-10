@@ -21,11 +21,9 @@ def mean_squared_error(y_true, y_pred):
     return ((y_true - y_pred) ** 2).mean()
 
 def mean_squared_error_grad(y_true, y_pred):
-    # Asegúrate de que las dimensiones sean consistentes
     if y_true.ndim == 1:
         y_true = y_true.reshape(-1, 1)
     if y_pred.ndim == 1:
         y_pred = y_pred.reshape(-1, 1)
-        
-    # Gradiente del MSE
+
     return 2 * (y_pred - y_true) / y_true.shape[0]
