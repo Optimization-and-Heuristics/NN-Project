@@ -6,10 +6,11 @@ import pandas as pd
 def predict(nn, X):
     return nn.forward(X)
 
+def accuracy_evaluate(predictions, labels):
+    return np.mean(np.argmax(predictions, axis=1) == np.argmax(labels, axis=1))
 
-def evaluate(predictions, Y):
-    return np.mean(np.argmax(predictions, axis=1) == np.argmax(Y, axis=1))
-
+def mse_evaluate(predictions, labels):
+    return np.mean((predictions - labels) ** 2)
 
 def confusion_matrix(Y_test, Y_pred, class_labels=None, incline=False):
     true_labels = np.argmax(Y_test, axis=1)
@@ -59,7 +60,7 @@ def plot_training_history_with_validation(train_info, val_info):
     ax1.grid(True)
 
     ax2.plot(train_epochs, train_info["acc"], label="Training", color="blue")
-    ax2.plot(val_info["epoch"], val_info["acc"], label="Validation", color="red")
+    ax2.plot(val_info["epoch"], val_info["metric"], label="Validation", color="red")
     ax2.set_title("Accuracy for training and validation subsets")
     ax2.set_xlabel("Epochs")
     ax2.set_ylabel("Accuracy")
